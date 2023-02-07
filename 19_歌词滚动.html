@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    .box {
+      width: 300px;
+      height: 300px;
+      border: 2px solid pink;
+      margin: 10px auto 0;
+      background-color: #fff;
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    ul  {
+      position: absolute;
+      top: 150px;
+      width: 100%;
+      transition: top .3s linear;
+    }
+
+    ul > li {
+      width: 100%;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    ul > li.active {
+      color: orange;
+    }
+
+    audio {
+      width: 300px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <ul>
+      <li class="active">1</li>
+    </ul>
+  </div>
+
+  <audio src="./lrc/大碗宽面.mp3" controls></audio>
+
+
+  <script src="./lrc/lrc.js"></script>
+  <script>
+    /*
+      歌词滚动
+
+      代码实现
+        1. 把歌词拆开
+          => 准备两个空的数组
+          => 准备正则
+          => 循环捕获
+        2. 使用歌词数组去渲染页面
+          => 循环遍历数组, 生成 li 放到 ul 里面
+        3. 随着音乐的播放, 拿到对应的时间
+          => 把时间格式化成 00:00 的时间格式
+        4. 找到时间数组里面对应时间的索引
+          => 时间数组和歌词数组一定是一一对应
+          => 你的时间数组里面的 [5] 对应歌词数组 [5] 的那一句
+          => 判断一下, 只要不是 -1, 就应该让 ul 动
+          => 每一句向上移动 20px, -20px
+          => [0] 不需要移动
+          => [1] -20
+          => [2] -40
+          => -index * 20 + 'px'
+          => 所有的 li 没有类名, 当前这个有类名
+            -> index, 因为你用 歌词数组 渲染的 li
+            -> 时间数组的第几个就是歌词数组的第几个, 就是li的第几个
+    */
+
+    // 1-1. 准备数组
+    // 时间数组
+    const timeArr = []
+    // 歌词数组
+    const lrcArr = []
+    // 1-2. 准备正则
+    const reg = /\[(\d{2}:\d{2})\.\d{2}\](.+)/g
+
+    // 1-3. 循环捕获
+    let tmp = reg.exec(lrcStr)
+    while (tmp) {
+      timeArr.push(tmp[1])
+      lrcArr.push(tmp[2])
+      tmp = reg.exec(lrcStr)
+    }
+
+    // 2-1. 获取 ul 标签
+    const ul = document.querySelector('.box > ul')
+
+    // 2-2. 循环遍历歌词数组
+    let str = ''
+    lrcArr.forEach((item, index) => {
+      str += `<li class="${ index === 0 ? 'active' : '' }">${ item }</li>`
+    })
+    ul.innerHTML = str
+
+
+    // 3-1. 获取 audio 标签
+    const audio = document.querySelector('audio')
+
+    // 3-2. 绑定事件
+    audio.addEventListener('timeupdate', function () {
+
+      // 3-3. 拿到时间去格式化
+      const { currentTime } = this
+      const minutes = parseInt(currentTime / 60)
+      const seconds = parseInt(currentTime % 60)
+      const timeStr = (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds)
+
+      // 4-1. 再时间数组找到对应的索引
+      const index = timeArr.findIndex(item => item === timeStr)
+      // 4-2. 给 ul 赋值
+      if (index !== -1) {
+        ul.style.top = -index * 20 + 150 + 'px'
+        ;[...ul.children].forEach(item => item.className = '')
+        ul.children[index].className = 'active'
+      }
+    })
+
+  </script>
+</body>
+</html>

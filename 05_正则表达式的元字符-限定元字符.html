@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      正则表达式的元字符 - 限定元字符
+        + 写在普通元字符或者字母符号的后面
+        + 修饰前面 **一个符号** 的出现次数
+
+      1. *       表示出现 0 ~ 多次
+      2. +       表示出现 1 ~ 多次
+      3. ?       表示出现 0 ~ 1 次
+      4. {n}     表示出现 n 次
+      5. {n,}    表示出现 n ~ 多次
+        => {0,} 等价于 *
+        => {1,} 等价于 +
+      6. {n,m}   表示出现 n ~ m 次
+        => {0,1} 等价于 ?
+    */
+
+    // 1. *
+    // 表示你的字符串里面需要出现一个 0 ~ 多个 数字组成的片段
+    // const reg = /\d*/
+    // console.log(reg.test('abc1234abc'))
+    // 表示你的字符串只能由 0 ~ 多个 数字组成
+    // const reg2 = /^\d*$/
+    // console.log(reg2.test('abc1234abc'))
+    // const reg = /^\d*$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('1234'))
+
+
+    // 2. +
+    // 表示你的字符串只能由 1 ~ 多个 数字组成
+    // const reg = /^\d+$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('1234'))
+
+
+    // 3. ?
+    // 表示你的字符串只能由 0 或者 1 个数字组成
+    // const reg = /^\d?$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+
+
+    // 4. {n}
+    // 表示你的字符串只能由 3 个数字组成
+    // const reg = /^\d{3}$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('1234'))
+    // console.log(reg.test('12345'))
+
+
+    // 5. {n,}
+    // 表示你的字符串只能由 2 ~ 多个 数字组成
+    // const reg = /^\d{2,}$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('1234'))
+
+
+    // 6. {n,m}
+    // 表示你的字符串只能由 2 ~ 4 个数组组成
+    // const reg = /^\d{2,4}$/
+    // console.log(reg.test(''))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('12'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('1234'))
+    // console.log(reg.test('12345'))
+
+
+  </script>
+</body>
+</html>

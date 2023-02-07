@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+  <script>
+    /*
+      小练习
+    */
+
+    // const reg = /\d{2,4}/
+    // console.log(reg.test(''))         // fasle
+    // console.log(reg.test('1'))        // false
+    // console.log(reg.test('12'))       // true
+    // console.log(reg.test('123'))      // true
+    // console.log(reg.test('1234'))     // true
+    // console.log(reg.test('12345'))    // true false
+    // console.log(reg.test('123456'))   // true
+
+
+    /*
+      需求:
+        + 名字: 6 到 8 位, 不能以 _ 开头, 只能由数字字母下划线组成
+        + 只能是 qq 163 sina 邮箱
+        + 后缀只能是 .com 或者 .cn
+    */
+
+    // const reg = /^[0-9a-zA-Z]\w{5,7}@(qq|163|sina)\.(com|cn)$/
+    // console.log(reg.test('asdasd@qq.com'))
+    // console.log(reg.test('_asdasd@qq.com'))
+    // console.log(reg.test('asdasd@162.com'))
+    // console.log(reg.test('asdasd@163.net'))
+
+    /*
+      需求2:
+        + 我要能拿到手机号的运营商
+        + +86 有可能有有可能没有
+        + 需要一个完整的手机号
+    */
+
+    // const reg = /^(?:\+86 ?)?((133|158)\d{8})$/
+    // console.log(reg.exec('13301295501'))
+    // console.log(reg.exec('+86 13301295501'))
+    // console.log(reg.exec('+86 13301295501'))
+  </script>
+</body>
+</html>

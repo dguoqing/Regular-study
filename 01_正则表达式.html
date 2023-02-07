@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      RegExp - 正则表达式 (Regular Expression)
+        + 也叫 "规则表达式"
+        + 是一个复杂数据类型
+        + 作用:
+          1. 专门用来验证字符串是否符合规则
+          2. 从字符串里面获取一部分符合规则的内容
+        + 语法:
+          => 使用一些特定的符号, 来组合成一个表达式
+          => 使用这个表达式去验证字符串, 或者从字符串里面获取一些内容
+
+      创建一个正则表达式
+        1. 字面量形式创建
+          + var reg = /abcd/
+        2. 内置构造函数创建
+          + var res = new RegExp('abcd')
+        => 意义: 字符串里面包含一段 abcd 字母就可以
+          -> 检测: aaabbbcccddd 不合格
+          -> 检测: aaabcddddd   合格
+    */
+
+    // 1. 字面量创建
+    const reg = /abcd/
+    console.log(reg)
+    console.log(typeof reg)
+
+    // 2. 内置构造函数创建
+    const reg2 = new RegExp('abcd')
+    console.log(reg2)
+    console.log(typeof reg2)
+  </script>
+</body>
+</html>

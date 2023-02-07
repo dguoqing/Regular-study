@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      练习:
+        + 捕获一段字符串里面多有的三位数
+        + str = 'czxgcu123sdisaf123sdlk456ssdci789sdjca'
+        + 结果, 123 123 456 789
+
+      分析:
+        1. 数组: [123, 123, 456, 789]
+           对象: { 0: 123, 1: 123, 2: 456, 3: 789 }
+        2. 因为需要每一个都拿到
+          => 正则表达式需要全局 标识符 g
+        3. 因为不确定有多少个
+          => 需要循环
+          => 什么循环 while
+          => 只要 exec 捕获出来的不是 null, 就继续
+    */
+
+    // const str = 'czxgcu123sdisaf123sdlk456ssdci789sdjca'
+
+    // // 0. 准备正则
+    // const reg = /\d{3}/g
+
+    // // 1. 准备一个数组
+    // const res = []
+
+    // // 2. 先捕获一次
+    // let tmp = reg.exec(str)
+
+    // // 3. while 循环
+    // // tmp 的结果, 要吗是 [], 要吗就是 null
+    // while (tmp) {
+    //   // 把 tmp 这个数组里面的 [0] 放到我们准备好的数组里面
+    //   res.push(tmp[0])
+
+    //   // 改变自身
+    //   tmp = reg.exec(str)
+    // }
+
+    // console.log(res)
+
+
+    /*
+      全部替换字符串内的三位数为 **
+        + 一旦你又了全局标识符 g 直接使用 replace 就可以了
+    */
+
+    let str = 'czxgcu123sdisaf123sdlk456ssdci789sdjca'
+    const reg = /\d{3}/g
+    console.log(str.replace(reg, '**'))
+
+  </script>
+</body>
+</html>

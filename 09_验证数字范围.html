@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      正则验证数字范围
+        + 验证 0 ~ 255
+        + 思路:
+          => 把 0 ~ 255 的数字分成几类
+          => 一位数                         \d          0-9
+          => 两位数                         \d{2}        10 - 99
+          => 1 开头的三位数                 1\d{2}        100 - 199
+          => 2 开头 0 ~ 4 的三位数          2[0-4]\d      200 - 249
+          => 2 开头 5 的三位数              25[0-5]       250 - 255
+        + 正则:
+          => /^(\d|\d{2}|1\d{2}|2[0-4]\d|25[0-5])$/
+          => /^(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])$/
+          => /^(1?\d{1,2}|2[0-4]\d|25[0-5])$/
+    */
+
+    // 表示一个字符位置可以是 0 到 2 或者 5 或者 5
+    // const reg = /^[0-255]$/
+    // console.log(reg.test('0'))
+    // console.log(reg.test('1'))
+    // console.log(reg.test('2'))
+    // console.log(reg.test('5'))
+
+    // const reg = /^(\d|\d{2}|1\d{2}|2[0-4]\d|25[0-5])$/
+    // const reg = /^(1?\d{1,2}|2[0-4]\d|25[0-5])$/
+    // console.log(reg.test('0'))
+    // console.log(reg.test('9'))
+    // console.log(reg.test('20'))
+    // console.log(reg.test('89'))
+    // console.log(reg.test('123'))
+    // console.log(reg.test('198'))
+    // console.log(reg.test('248'))
+    // console.log(reg.test('255'))
+    // console.log(reg.test('256'))
+    // console.log(reg.test('301'))
+  </script>
+</body>
+</html>

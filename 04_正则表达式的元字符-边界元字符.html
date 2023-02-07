@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      正则表达式的元字符 - 边界元字符
+
+      1. ^  表示字符串开始
+      2. $  表示字符串结束
+    */
+
+    // 1. ^
+    // 表示你的字符串需要以一个数字开头
+    // const reg = /^\d/
+    // console.log(reg.test('asdas123'))
+    // console.log(reg.test('asd123as'))
+    // console.log(reg.test('1asdas'))
+
+    // 2. $
+    // 表示你的字符串需要以一个数字结尾
+    // const reg = /\d$/
+    // console.log(reg.test('asdas123'))
+    // console.log(reg.test('asd123as'))
+    // console.log(reg.test('1asdas'))
+
+
+    // 表示你的字符串从开头到结尾只能有一个数字
+    // const reg = /^\d\d$/
+    // console.log(reg.test('1b2')) // false
+    // console.log(reg.test('12')) // true
+  </script>
+</body>
+</html>

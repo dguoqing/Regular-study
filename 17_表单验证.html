@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2035193_jb4j6bvdrw.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      width: 500px;
+      padding: 20px;
+      border: 3px solid pink;
+      border-radius: 15px;
+      margin: 30px auto;
+    }
+
+    form > label {
+      position: relative;
+      width: 100%;
+      height: 30px;
+      display: block;
+      padding: 10px 0 20px;
+    }
+
+    form > label > span {
+      position: absolute;
+      left: 10px;
+      bottom: 5px;
+      font-size: 12px;
+      color: red;
+      display: none;
+    }
+
+    form > label > span.error {
+      display: block;
+    }
+
+    form > label > i {
+      position: absolute;
+      left: 250px;
+      width: 20px;
+      height: 20px;
+    }
+
+    form > label > i.icon-cuowu {
+      color: red;
+    }
+
+    form > label > i.icon-zhengque {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+
+  <form>
+    <label>
+      用户名: <input type="text">
+      <!-- <i class="iconfont icon-cuowu"></i> -->
+      <i class="iconfont"></i>
+      <span>只能由数字字母下划线组成, 6 ~ 12 位, 不能以 _ 开头</span>
+    </label>
+  </form>
+
+  <script>
+    /*
+      表单验证
+        + 需求:
+          随着用户输入, 随时进行表单验证
+          文本框最右边有一个字体图标, 对勾或者叉子
+          当用户输入的满足条件时, 显示对勾, 不满足条件时显示叉子
+          假定用户名规则 非下划线开头, 只能由数字字母下划线组成, 6 ~ 12 位
+          有一段文本提示, 当不满足要求的时候, 显示出文本内容
+
+      代码实现
+        1. 获取 input 文本框绑定事件
+          => input 事件, 因为要随着输入随时验证
+        2. 随时拿到用户输入的内容进行正则验证
+    */
+
+    // 0. 准备正则
+    const reg = /^[0-9a-zA-Z]\w{5,11}$/
+    let timer = 0
+
+    const i = document.querySelector('i')
+    const span = document.querySelector('span')
+    // 1. 获取元素绑定事件
+    const inp = document.querySelector('input')
+    inp.addEventListener('input', function () {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        // 2. 随时进行正则验证
+        if (reg.test(this.value)) {
+          // 对勾显示
+          i.classList.add('icon-zhengque')
+          i.classList.remove('icon-cuowu')
+          span.classList.remove('error')
+        } else {
+          // 叉子 和 文本显示
+          i.classList.add('icon-cuowu')
+          i.classList.remove('icon-zhengque')
+          span.classList.add('error')
+        }
+      }, 300)
+    })
+  </script>
+</body>
+</html>

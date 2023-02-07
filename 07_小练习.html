@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      小练习
+    */
+
+    /*
+      需求1:
+        捕获一段 html 结构的字符串
+        <div stylle="" class=""><span></span></div>
+        捕获开标签里面的所有内容
+    */
+    // const str = '<div stylle="" class=""><span></span></div>'
+    // const reg = /<.+?>/
+    // console.log(reg.exec(str))
+
+
+    // 2.
+    // const reg = /^abcd{2}$/
+    // console.log(reg.test('abcdabcd')) // false
+    // console.log(reg.test('abcdd')) // true
+
+    // 3. 想匹配 abcdabcd
+    // const reg = /a{2}b{2}c{2}d{2}/
+    // console.log(reg.test('abcdabcd'))
+    // console.log(reg.test('aabbccdd'))
+  </script>
+</body>
+</html>

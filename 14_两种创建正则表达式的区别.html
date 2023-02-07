@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      两种创建正则表达式的区别
+        1. 字面量创建
+          + 语法: var reg = /abcd/igy
+          + 不能进行字符串拼接
+          + 书写基础元字符的时候直接写 \xx
+        2. 内置构造函数创建
+          + 语法: var reg = new RegExp('abcd', 'igy')
+          + 可以进行字符串拼接
+          + 书写基础元字符的时候要书写 \\xx
+    */
+
+    // 1. 进行字符串拼接
+    // var str = 'hello'
+
+    // 字符串拼接完毕就变成了字符串, 不是正则, 不能使用 test 和 exec 方法
+    // var reg = '/' + str + '/'
+    // console.log(reg.test())
+
+    // 因为 RegExp 的第一个参数就是传递一个字符串类型
+    // var reg = new RegExp(str + ' world')
+    // console.log(reg)
+
+
+    // 2. 书写基础元字符
+    // var reg = /\d\s\w/
+    // console.log(reg)
+
+    // var reg = new RegExp('\\s\\d\\w')
+    // console.log(reg)
+
+    /*
+      字符串
+        + 再字符串里面也有转义符号
+        + 也是 \
+        + 当你书写 n 的时候, 就表示文本 n
+        + 当你书写 \n 的时候, 就表示换行的意思
+        + 当你再字符串里面书写 \s 的时候, 他会把 s 转换成有意义的内容
+          => 但是 \s 确实没有实际意义
+          => 就变成了一个普通 s 文本
+        + 当你再字符串里面书写 \ 的时候, 表示转义符号
+          => 但是当你书写 \\ 的时候, 表示一个 \ 文本
+    */
+
+  </script>
+</body>
+</html>

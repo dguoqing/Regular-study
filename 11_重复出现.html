@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      重复出现
+
+      1. \num
+        => num 是一个正整数
+        => \1 \2 \3 ...
+        => num 是一个数字, 表示的是正则第 num 个可被捕获的 ()
+          -> 这个可被捕获的小括号位置是什么 出现 一份 一摸一样的内容
+    */
+
+    // \1 表示重复出现第一个 () 一模一样的内容一遍
+    // const reg = /(abc|def)\d+\1/
+    // console.log(reg.test('abc123abc')) // true
+    // console.log(reg.test('abc123def')) // false
+
+    // onst reg = /([abcd])\d+([abcd])\d+\1\2/
+    // console.log(reg.test('a123b123ab'))
+
+    // const reg = /(?:[abcd])\d+([abcd])\d+\1/
+    // console.log(reg.test('a123b123a')) // false
+    // console.log(reg.test('a123b123b')) // false
+  </script>
+</body>
+</html>

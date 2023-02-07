@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      正则表达式的元字符 - 基础元字符
+        + 元字符: 组成正则的基本符号
+          => 以符号的形式来代替文本内容
+          => 把所有的文本内容归结成一些符号来代替
+
+      1. \s   表示一个空格
+      2. \S   表示一个非空格
+      3. \t   表示一个制表符(tab)
+        => 一个制表符就是制表符, 不是多个空格
+      4. \d   表示一个数字
+      5. \D   表示一个非数字
+      6. \w   表示一个 数字字母下划线
+        => 表示 数字 字母 下划线 三选一 得有一个
+      7. \W   表示一个 非数字字母下划线
+        => 表示 数字 字母 下划线 以外的任意一个都行
+      8. 点(.) 表示非换行的任意字符
+      9. 斜线(\) 表示转义符
+        => 把没有意义的内容转换成有意义的内容
+        => 把有意义的内容转换成没有意义的内容
+    */
+
+    // 1. \s
+    // 表示字符串里面需要有一个 空格 字符
+    // const reg = /\s/ // 等价于 / /
+    // console.log(reg.test('abcdefg'))
+    // console.log(reg.test('abcdefg '))
+    // console.log(reg.test(' abcdefg'))
+    // console.log(reg.test('abc d efg'))
+
+    // 2. \S
+    // 表示字符串里面需要有一个 非空格 字符
+    // const reg = /\S/
+    // console.log(reg.test('                '))
+    // console.log(reg.test('                a'))
+    // console.log(reg.test('a                '))
+    // console.log(reg.test('   a   a   a        '))
+
+		// 3. \t
+		// 表示你的字符串里面需要有一个 制表符 字符
+		// const reg = /\t/
+		// console.log(reg.test('  ')) // 两个空格
+    // console.log(reg.test('	')) // 一个制表符
+
+    // 4. \d
+    // 表示你的字符串里面需要有一个 数字 字符
+    // const reg = /\d/
+    // console.log(reg.test('abcdef'))
+    // console.log(reg.test('abcdef1'))
+    // console.log(reg.test('1abcdef'))
+    // console.log(reg.test('ab1c1d111ef'))
+
+    // 5. \D
+    // 表示你的字符串里面需要有一个 非数字 字符
+    // const reg = /\D/
+    // console.log(reg.test('1234567890'))
+    // console.log(reg.test('1234567890a'))
+    // console.log(reg.test('a1234567890'))
+    // console.log(reg.test('12a34a5a67a890'))
+
+
+    // 6. \w
+    // 表示你的字符串里面需要有一个 数字或者字母或者下划线 字符
+    // const reg = /\w/
+    // console.log(reg.test('!@#$%$#@#$%$#$%$#$%$#'))
+    // console.log(reg.test('!@#$%$#@#$%$#$%$#$%$#111'))
+    // console.log(reg.test('!@#$%$#@#$%$#$%$#$%$#aaaa'))
+    // console.log(reg.test('!@#$%$#@#$%$#$%$#$%$#____'))
+    // console.log(reg.test('!@#123123$%$#@#$%$#$%asdasd$#$%$#'))
+
+
+    // 7. \W
+    // 表示你的字符串里面需要有一个 数字字母下划线 以外的字符
+    // const reg = /\W/
+    // console.log(reg.test('asdasd123123123____'))
+    // console.log(reg.test('asdasd123123123____%'))
+    // console.log(reg.test('asdasd12312312##3____'))
+
+
+    // 8. 点(.)
+    // 表示你的字符串里面需要有一个 非换行 内容
+    // const reg = /./
+    // console.log(reg.test('\n'))
+    // console.log(reg.test('a\nb'))
+    // console.log(reg.test(' \n'))
+
+
+    // 9. 斜线(\)
+    // 表示你的字符串里面需要有一个字母 s
+    const reg = /s/
+    console.log(reg.test('abcd'))
+    console.log(reg.test('abcds'))
+
+    // 表示你的字符串里面需要有一个 空格字符
+    const reg2 = /\s/
+    console.log(reg2.test('abcdssss'))
+    console.log(reg2.test('abcdssss '))
+
+    // 表示你的字符串里面需要有一个 非换行 的任意字符
+    const reg3 = /./
+    console.log(reg3.test('asday'))
+
+    // 表示你的字符串里面需要有一个 点 文本
+    const reg4 = /\./
+    console.log(reg4.test('asdasd'))
+    console.log(reg4.test('asdasd.'))
+
+    // 表示你的字符串里面需要有一个 \ 文本
+    const reg5 = /\\/
+    console.log(reg5.test('\\'))
+
+
+
+
+
+
+    </script>
+</body>
+</html>

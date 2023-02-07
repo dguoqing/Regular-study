@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+    span {
+      display: block;
+      width: 300px;
+      height: 100px;
+      border: 1px solid #333;
+      margin: 30px;
+      line-height: 100px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  <!--
+    audio 标签
+      + 用来引入一个音频文件
+      + src 属性用来书写音频文件地址
+      + controls 属性, 显示控制器
+      + autoplay 属性, 自动播放
+        => 最新的 chrome 浏览器不允许自动播放
+  -->
+
+  <audio src="./lrc/大碗宽面.mp3" controls></audio>
+
+  <span></span>
+
+
+  <script src="./lrc/lrc.js"></script>
+  <script>
+    /*
+      思路:
+        1. 随着音乐的播放, 随时拿到当前播放的时间
+          + 去到 歌词字符串里面进行比对
+          + 找到一个时间匹配的歌词
+          + 把后面的歌词内容拿出来, 填充到 span 标签里面
+
+      代码实现
+        1. 获取 audio 标签 和 span 标签
+        2. 绑定事件
+          => audio 和 video 标签都有一个事件叫做 timeupdate
+          => 只要时间再变化, 就会触发
+          => 大概是 1s 四次
+        3. 再事件中拿到当前播放的时间
+          => audio 元素有一个属性
+          => duration, 总时间
+          => currentTime, 当前时间, 以秒位单位
+        4. 格式化时间位 00:00 这样的形式
+        5. 去到歌词字符串里面取出对应的内容
+          => 正则得拼接一段字符串, 创建的方式 new RegExp()
+          => [00:00.04]吴亦凡 - 大碗宽面
+          => /\[ timeStr \.\d{2}\].+/
+        6. 进行赋值
+    */
+
+    // 1. 获取元素
+    const audio = document.querySelector('audio')
+    const span = document.querySelector('span')
+
+    // 2. 绑定事件
+    audio.addEventListener('timeupdate', function () {
+
+      // 3. 拿到当前时间
+      const { currentTime } = audio
+
+      // 4. 格式化时间
+      const minutes = parseInt(currentTime / 60)
+      const seconds = parseInt(currentTime % 60)
+      const timeStr = (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds)
+
+      // 5. 组装正则表达式
+      const reg = new RegExp('\\[' + timeStr + '\\.\\d{2}\\](.+)')
+      let lrc = reg.exec(lrcStr)
+      lrc = lrc ? lrc[1] : ''
+
+      span.innerHTML = lrc ? lrc : span.innerHTML
+    })
+
+
+  </script>
+</body>
+</html>

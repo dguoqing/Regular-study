@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      字符串和正则合作的方法
+        + 这些方法都是字符串的常用方法, 只不过参数位置可以写正则
+
+      1. search()
+        + 语法:
+          1. 字符串.search(字符串片段)
+          2. 字符串.search(正则表达式)
+        + 返回值:
+          => 如果有就是对应的索引
+          => 如果没有就是 -1
+
+      2. replace()
+        + 语法:
+          1. 字符串.replace(字符串片段, 要替换的内容)
+          2. 字符串.replace(正则表达式, 要替换的内容)
+        + 返回值:
+          1. 只能替换第一个查找到的内容, 返回替换好的字符串
+          2. 没有全局标识符 g 的时候, 只能替换第一个查找到的内容, 返回替换好的字符串
+             有全局标识符 g 的时候, 会把字符串内所有满足正则规则的内容全部替换, 返回替换好的字符串
+
+      3. match()
+        + 语法:
+          1. 字符串.match(字符串片段)
+          2. 字符串.match(正则表达式)
+        + 返回值:
+          1. 查找到字符串内一个满足字符串片段的内容返回, 返回格式和 exec 一模一样
+          2. 当正则表达式没有全局标识符 g 的时候, 返回值和 exec 方法一模一样
+             当正则表达式有全局标识符 g 的时候, 返回一个数组, 里面是所有满足条件的内容
+
+      补: 正则匹配中文
+        + 再正则表达式里面 \u 表示查找中文
+        + 后面带上中文的 四位 unicode 编码
+        + [\u4e00-\u9fa5] 表示任意一个中文字符
+    */
+
+    // 1. search
+    // const str = 'sada123sjdk'
+    // console.log(str.search('123'))
+    // console.log(str.search(/\d{3}/))
+
+
+    // 2. replace()
+    // const str = 'abcd123abcd123abcd123abcd'
+    // console.log(str.replace('123', '**'))
+    // console.log(str.replace(/\d{3}/, '**'))
+    // console.log(str.replace(/\d{3}/g, '**'))
+
+
+    // 3. match()
+    const str = 'hello 你好 world hello 世界 world hello 我不好 world hello 还行 world'
+    console.log(str.match('你好'))
+    console.log(str.match(/你好/))
+    console.log(str.match(/[\u4e00-\u9fa5]+/g))
+  </script>
+</body>
+</html>

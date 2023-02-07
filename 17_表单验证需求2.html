@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2035193_jb4j6bvdrw.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      width: 500px;
+      padding: 20px;
+      border: 3px solid pink;
+      border-radius: 15px;
+      margin: 30px auto;
+    }
+
+    form > label {
+      position: relative;
+      width: 100%;
+      height: 30px;
+      display: block;
+      padding: 10px 0 20px;
+    }
+
+    form > label > span {
+      position: absolute;
+      left: 10px;
+      bottom: 5px;
+      font-size: 12px;
+      color: red;
+      display: none;
+    }
+
+    form > label > span.error {
+      display: block;
+    }
+
+    form > label > i {
+      position: absolute;
+      left: 250px;
+      width: 20px;
+      height: 20px;
+    }
+
+    form > label > i.icon-cuowu {
+      color: red;
+    }
+
+    form > label > i.icon-zhengque {
+      color: green;
+    }
+
+    form > label > p {
+      width: 100px;
+      height: 30px;
+      position: absolute;
+      bottom: -5px;
+      font-size: 20px;
+      color: #333;
+      background-color: #ccc;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    form > label > p.low {
+      left: 0;
+    }
+
+    form > label > p.low.active {
+      background-color: red;
+    }
+
+    form > label > p.center {
+      left: 120px;
+    }
+
+    form > label > p.center.active {
+      background-color: orange;
+    }
+
+    form > label > p.strong {
+      left: 240px;
+    }
+
+    form > label > p.strong.active {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+
+
+  <form>
+    <label>
+      用户名: <input type="text">
+      <!-- <i class="iconfont icon-cuowu"></i> -->
+      <i class="iconfont"></i>
+      <span>只能由数字字母下划线组成, 6 ~ 12 位, 不能以 _ 开头</span>
+    </label>
+
+    <label>
+      密&nbsp;&nbsp;码: <input type="text" name="password" autocomplete="off">
+      <p class="low">弱</p>
+      <p class="center">中</p>
+      <p class="strong">强</p>
+    </label>
+  </form>
+
+  <script>
+    /*
+      表单验证
+        + 需求:
+          一个密码强度验证
+          假定三个内容
+            1. 数字
+            2. 字母
+            3. 特殊符号 '@#$'
+          当你的密码有三个之中的任意一个, 强度是 弱
+          当你的密码有三个之中的任意两个, 强度是 中
+          当你的密码有三个之中的任意三个, 强度是 强
+
+
+    */
+    // 0. 准备正则
+    const reg = /^[0-9a-zA-Z]\w{5,11}$/
+    let timer = 0
+
+    // 1. 获取元素
+    const inp = document.querySelector('input')
+    const span = document.querySelector('span')
+    const i = document.querySelector('i')
+
+
+    // 1-2. 绑定事件
+    inp.addEventListener('input', function () {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        if (reg.test(this.value)) {
+          i.classList.add('icon-zhengque')
+          i.classList.remove('icon-cuowu')
+          span.classList.remove('error')
+        } else {
+          i.classList.add('icon-cuowu')
+          i.classList.remove('icon-zhengque')
+          span.classList.add('error')
+        }
+      }, 300)
+    })
+
+
+    /*
+      需求2分析:
+        1. 获取元素绑定事件
+        2. 绑定 input 事件
+        3. 准备正则
+          => 几个 ? 3 个
+          => 怎么判断 ? 一个判断数字, 一个判断字母, 一个判断符号
+        4. 怎么确定密码强度
+          => 确定一个私有变量, 写在事件里面, 初始值位 0
+            -> 之所以写成私有变量, 表示你的每一次书写都会把 level 变成 0
+          => 依次使用三个正则逐个判断
+            -> 满足一个 ++ 一次
+            -> 三个都判断完毕, 就能直到 level 级别
+          => 再事件的一开始, 分别给三个 p 标签去掉 active
+            -> 根据级别给 p 标签添加 active
+
+    */
+
+    // 3. 准备正则
+    const numReg = /\d+/
+    const zimuReg = /[a-z]+/i
+    const fuhaoReg = /[@#%\$]/
+
+    // 1. 获取元素
+    const pwdInp = document.querySelector('input[name=password]')
+    const p = document.querySelectorAll('p')
+
+    // 2. 绑定是按
+    pwdInp.addEventListener('input', function () {
+      const text = this.value
+
+      p.forEach(item => item.classList.remove('active'))
+
+      // 初始变量表示强度级别
+      let level = 0
+
+      // 使用三个正则依次判断
+      if (numReg.test(text)) level++
+      if (zimuReg.test(text)) level++
+      if (fuhaoReg.test(text)) level++
+
+      // 给对应的 p 标签添加 active
+      for (let i = 0; i < level; i++) {
+        p[i].classList.add('active')
+      }
+    })
+
+  </script>
+</body>
+</html>

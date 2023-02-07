@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    /*
+      正则表达式的两个方法
+        1. 匹配: 验证字符串是不是符合正则规则
+          => 语法: 正则.test(你要检测的字符串)
+          => 返回值: 一个布尔值, true 或者 false
+        2. 捕获: 从字符串里面获取符合正则规则的那一部分片段
+          => 语法: 正则.exec(你要捕获的字符串)
+          => 返回值:
+            1. 字符串里面没有符合规则的片段
+              -> null
+            2. 字符串里面有符合规则的片段
+              2-1. 基础捕获
+                -> 返回值是一个数组
+                -> [0] 是捕获出来的片段
+                -> 不管有多少个片段, 都只是捕获第一个片段
+                -> 不管捕获多少次, 都是第一个片段
+              2-2. 当正则表达式有 () 的时候
+                -> 返回值是一个数组
+                -> 从 索引[1] 开始依次是每一个小括号的单独捕获
+              2-3. 当正则有全局标识符 g 的时候
+                -> 第二次捕获会从第一次捕获的结束为开始继续向后查找
+                -> 直到找不到了位置, 返回 null
+                -> 再后面一次捕获, 依旧会从 [0] 位置开始查找
+    */
+
+    // 0. 准备一个正则
+    // 表示字符串里面需要有一个 abcd 片段
+    const reg = /abcd/
+
+    // 1. test()
+    console.log(reg.test('aaabbbcccddd'))
+    console.log(reg.test('aaabcddddd'))
+
+    // 2. exec()
+    const res = reg.exec('aaabbbcccddd')
+    console.log(res)
+
+    const res2 = reg.exec('aaabcdddddabcdabcd')
+    console.log(res2)
+
+
+
+  </script>
+</body>
+</html>
